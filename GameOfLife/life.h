@@ -6,6 +6,11 @@
 #include <vector>
 #include <random>
 #include <cstring>
+#include <mutex>
+#include <stdio.h> 
+#include <windows.h> 
+
+static std::mutex barrier;
 
 class LifeGenerator
 {

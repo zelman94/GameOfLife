@@ -11,7 +11,7 @@
 #include <windows.h> 
 
 static std::mutex barrier;
-
+static std::mutex g_num_mutex;
 class LifeGenerator
 {
 public:

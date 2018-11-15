@@ -83,7 +83,7 @@ void LifeGenerator::wskaznikZycia(int** newMatrix, int** oldMatrix, int row, int
 
 	std::vector<int> wskaznikZycia;
 	int wsk;
-	std::lock_guard<std::mutex> block_threads_until_finish_this_job(barrier);
+	//std::lock_guard<std::mutex> block_threads_until_finish_this_job(barrier);
 	for (int i = 1; i < N-1; i++) //petla glowna liczy dla ktorej komorki wskaznik
 	{
 		wsk = 0;
@@ -166,8 +166,9 @@ void LifeGenerator::multiplyMatrixes()
 	{
 		for (int i = 1; i < N - 1; ++i)
 		{
-
+			g_num_mutex.lock();
 			threads.push_back(std::thread(wskaznikZycia, newMatrix, oldMatrix, i, N));
+			g_num_mutex.unlock();
 		}
 
 		for (auto thread = threads.begin(); thread != threads.end(); ++thread)
